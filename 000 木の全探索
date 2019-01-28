@@ -11,11 +11,11 @@ int v[INT_MAX];
 int dp[INT_MAX][INT_MAX];
 
 int res(int i, int j){
-  //The items after item i has the maximum weight of j
+  //i items remaining j weights remaining
   //Records the parts that ha already been explored
 	if(dp[i][j]>=0) return dp[i][j];
 	int r;
-  //The last item
+  //No items remaining
 	if(i == n) r = 0;
   //The current item overweights
 	else if(j < w[i]) r = res(i+1, j);
@@ -28,11 +28,10 @@ int res(int i, int j){
 //再帰関数を書かなくて、二重ループで解答できる
 vector<vector<int>> dp(int i, int j){
 	vector<vector<int>> dp;
-	for(int n=j-1;n>=0;n--){
-		for(int m=0;m<i;m++){
-			if(n==j-1) dp[m][n] = 0;
-			else if(j<w[i]) dp[m][n] = dp[m+1][n];
-			else dp[m][n] = max(dp[m+1][n],v[i]+dp[m+1][n-w[i]]);
+	for(int n=i-1;n>=0;n--){//从满状态开始，还剩i个
+		for(int m=0;m<j;m++){
+			if(j<w[n]) dp[n][m] = dp[n+1][m];
+			else dp[n][m] = max(dp[n+1][m],v[n]+dp[n+1][m-w[i]]);
 		}
 	}
 	return dp;
