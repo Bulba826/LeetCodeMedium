@@ -1,0 +1,22 @@
+//The search of a tree
+//Based on 0-1 backpack problem
+//全探索
+//0-1ナップサック問題
+//w个各自重量；n个物品；W最大重量
+//Recursive solution
+int w[INT_MAX];
+int v[INT_MAX];
+
+int res(int i, int j){
+  //The items after item i has the maximum weight of j
+  //Records the parts that ha already been explored
+	if(dp[i][j]>=0) return dp[i][j];
+	int r;
+  //The last item
+	if(i == n) r = 0;
+  //The current item overweights
+	else if(j < w[i]) r = res(i+1, j);
+  //Calculate the maximum of taking the current or not
+	else r= max(res(i+1,j),v[i]+res(i+1, j-w[i]));
+	return dp[i][j] = r;
+}
