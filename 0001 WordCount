@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <algorithm>
+#include <set>
+#include <map>
+using namespace std;
+
+set<string> allWord;
+ifstream input;
+map<string, int> aMap;
+
+void countNum(const string& filename){
+            cout<<"Reading "<<filename<<" ..."<<endl;
+            //TO DO read the file
+            input.open(filename);
+            string word;
+            //getline
+            while(input>>word){
+                if(allWord.find(word)==allWord.end())
+                    allWord.insert(word);
+            }
+            for(string word: allWord){
+                cout<<word<<endl;
+            }
+            cout<<"File contains "<<allWord.size()<<" unique words"<<endl;
+}
+void countOccur(const string& filename, string goal){
+    cout<<"Reading "<<filename<<" ..."<<endl;
+    input.open(filename);
+    string word;
+    while(input>>word){
+        if(aMap.find(word)==aMap.end())
+            aMap.insert(pair<string,int>(word,1));
+        else aMap[word]++;
+    }
+    for(auto it = aMap.begin();it!=aMap.end();it++){
+        cout<<it->first<<" : "<<it->second<<endl;
+    }
+    cout<<"Finding the word: "<< goal <<"."<<endl;
+    cout<<"Number of apperance: "<<aMap[goal]<<endl;
+
+}
+int main(){
+    // countNum("untitled.txt");
+    string goal;
+    while(cin>>goal)countOccur("untitled.txt",goal);
+    return 0;
+}
