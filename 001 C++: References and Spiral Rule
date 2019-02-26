@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+int main() {
+  //Reference in C++
+	int n = 0, r = 42;
+	int& i = n;
+	i = r;
+	i = 1;
+	r = i;
+	cout << "r: " << r << endl;
+	cout << "Address of n:" << &i << endl << "Value of n:" << i << endl;
+	cout << "n: " << n << endl;
+	return 0;
+  //Spiral Rule
+  //pointer and const in C++
+  //Read the expression backwards;
+  int value = 1;
+	int* pointer = &value;//change value through pointer: able 
+						  //change what pointer is pointing: able
+	int const* pointer_2 = &value;//a pointer pointing to const int;
+								  //change value through pointer: not able
+								  //change what pointer is pointing:able
+	int *const pointer_3 = &value;//a const pointer pointing to int;
+								  //change value through pointer: not able
+								  //change what pointer is pointing:able
+	const int *const pointer_4 = &value;//a const pointer pointing to const int;
+									   //not able to do anything.
+	//int can be seen as const int as well;
+	//To be advised, it is not recommended to implictly converse int into const int
+	return 0;
+}
